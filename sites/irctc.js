@@ -11,7 +11,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const irctcData = async (url, userName, password) => {
+const irctcData = async (url, userName, password,origin,destination) => {
     const browser = await puppeteer.launch({
         headless: false, executablePath: executablePath(),
         defaultViewport: null,
@@ -44,15 +44,19 @@ const irctcData = async (url, userName, password) => {
     await page.keyboard.press('Tab');
     await page.keyboard.type(password);
     // form-control input-box ng-valid ng-dirty ng-touched
-    const imageUrl = await page.$eval('.captcha-img', img => img.getAttribute('src'));
-    const captchText = await captchaExtractor(imageUrl);
-    console.log("captcha", captchText)
-    const stringWithoutSpaces = captchText.split(' ').join('');
-    console.log(stringWithoutSpaces.length)
-    await page.keyboard.press('Tab');
+    // const imageUrl = await page.$eval('.captcha-img', img => img.getAttribute('src'));
+    // console.log(imageUrl)
+    // const captchText = await captchaExtractor(imageUrl);
+    // console.log("captcha", captchText)
+    // const stringWithoutSpaces = captchText.split(' ').join('');
+    // console.log(stringWithoutSpaces.length)
+    // await page.keyboard.press('Tab');
 
-    await page.keyboard.type(stringWithoutSpaces);
+    // await page.keyboard.type(stringWithoutSpaces);
+    await page.waitForSelector('.search_btn.train_Search', { visible: true });
     await sleep(10000);
+
+    await page.type(".ng-tns-c57-8.ui-inputtext.ui-widget.ui-state-default.ui-corner-all.ui-autocomplete-input.ng-star-inserted",origin)
     // await page.keyboard.press('Tab');
     // await page.keyboard.press('Tab');
 
@@ -81,7 +85,7 @@ const irctcData = async (url, userName, password) => {
 
     // }
 
-    await browser.close();
+    // await browser.close();
 
     // return prdtArray;
 

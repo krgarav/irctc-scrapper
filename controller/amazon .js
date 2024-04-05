@@ -17,9 +17,11 @@ exports.getResult = async (req, res) => {
 exports.getIrctc = async (req, res) => {
     try {
         const userName = req.header("username");
-        const password = req.header("password")
+        const password = req.header("password");
+        const origin = req.header("origin");
+        const destination = req.header("destination");
         console.log(userName, password)
-        const data = await irctcData(URL, userName, password);
+        const data = await irctcData(URL, userName, password, origin, destination);
     } catch (err) {
         console.log(err);
         return res.status(500).json({ message: "Error occured" })

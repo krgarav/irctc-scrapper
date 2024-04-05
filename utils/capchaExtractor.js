@@ -30,6 +30,7 @@ const captchaExtractor = async (imageUrl) => {
 
     // Convert the canvas to a PNG data URL
     const backgroundImgUrl = canvas.toDataURL('image/png');
+    console.log(backgroundImgUrl)
     const text = await recognizeImage(backgroundImgUrl);
     // console.log(text)
     return text;
