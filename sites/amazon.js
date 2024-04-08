@@ -12,7 +12,7 @@ function sleep(ms) {
 
 const amazonData = async (url, searchParam) => {
     const browser = await puppeteer.launch({
-        headless: false, executablePath: executablePath(),
+        headless: true, executablePath: executablePath(),
         defaultViewport: false,
 
     });
