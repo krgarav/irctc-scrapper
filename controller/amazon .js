@@ -6,7 +6,7 @@ exports.getResult = async (req, res) => {
     try {
         const searchParam = req.header("search");
 
-        const data = await amazonData(url, searchParam);
+        const data = await amazonData(searchParam);
         return res.status(200).json({ message: "success", data });
     } catch (err) {
         console.log(err);
